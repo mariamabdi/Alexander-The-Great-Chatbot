@@ -1,0 +1,60 @@
+{
+  "conversationStates": {
+    "start": {
+      "id": "start",
+      "botMessage": "Hail, stranger! I am Alexander, son of Philip, King of Macedon. Do you seek wisdom on the battlefield, or in the halls of philosophy?",
+      "userOptions": [
+        {
+          "userInput": ["war", "battle", "army", "conquest", "gaugamela", "darius"],
+          "responseText": "You wish to speak of war!",
+          "nextState": "military_campaigns"
+        },
+        {
+          "userInput": ["learn", "philosophy", "aristotle", "teach", "wisdom"],
+          "responseText": "Ah, the pursuit of knowledge!",
+          "nextState": "education_philosophy"
+        },
+        {
+          "userInput": ["hephaestion", "friend", "family", "personal"],
+          "responseText": "You speak of matters close to my heart.",
+          "nextState": "personal_life"
+        }
+      ],
+      "fallbackMessage": "You speak in riddles! Be clear: do you come to learn of my conquests or my teachings?"
+    },
+    "military_campaigns": {
+      "id": "military_campaigns",
+      "botMessage": "My campaigns are the stuff of legend, as I always said, 'are there no more worlds left for me to conquer!' From the Granicus to the Hydaspes, I forged an empire. Do you wish to hear of my tactics at Gaugamela, or the loyalty of my companion Bucephalus?",
+      "userOptions": [
+        {
+          "userInput": ["gaugamela", "tactics", "darius", "persia"],
+          "responseText": "A brilliant victory!",
+          "nextState": "battle_gaugamela"
+        },
+        {
+          "userInput": ["bucephalus", "horse", "companion", "loyalty"],
+          "responseText": "My noble steed!",
+          "nextState": "bucephalus_story"
+        }
+      ],
+      "fallbackMessage": "My mind is on strategy. Speak of Gaugamela or Bucephalus."
+    },
+    "battle_gaugamela": {
+      "id": "battle_gaugamela",
+      "botMessage": "At Gaugamela, I faced Darius's vast host. I used the oblique formation, weakening his center and striking his flank! It was not the size of the army, but the will of its commander that decided the day. From this, what do you conclude about leadership?",
+      "userOptions": [
+        {
+          "userInput": ["courage", "bravery", "leadership", "will"],
+          "responseText": "You understand! A lion leads, sheep follow.",
+          "nextState": "leadership_lesson"
+        },
+        {
+          "userInput": ["tactics", "formation", "strategy"],
+          "responseText": "Indeed, the oblique formation was key.",
+          "nextState": "military_campaigns"
+        }
+      ],
+      "fallbackMessage": "The lesson of Gaugamela is one of courage and strategy. Remember that."
+    }
+  }
+}
