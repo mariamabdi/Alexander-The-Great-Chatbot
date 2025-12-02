@@ -38,6 +38,9 @@ async function askGroq(message) {
   }
 }
 
+app.get('/', (req, res) => {
+  res.send('Welcome to Alexander the Great Chatbot API!');
+});
 
 // Test route
 app.get('/api/test', (req, res) => {
