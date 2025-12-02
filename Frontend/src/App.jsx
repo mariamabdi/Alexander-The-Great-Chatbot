@@ -8,27 +8,36 @@ function App() {
   const sendMessage = async () => {
     if (!inputText.trim()) return;
 
-    // Add user message to chat
     const userMessage = { text: inputText, isUser: true };
     setMessages(prev => [...prev, userMessage]);
     setInputText('');
 
     try {
-      // Send to backend
+      console.log(' Sending to backend:', inputText);
       const response = await fetch('http://localhost:3000/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: inputText })
+        body: JSON.stringify({ message: inputText, sessionId: 'user123' })
       });
       
-      const data = await response.json();
+      console.log(' Response status:', response.status);
       
-      // Add bot response to chat
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log(' Response data:', data);
+      
       const botMessage = { text: data.botMessage, isUser: false };
       setMessages(prev => [...prev, botMessage]);
       
     } catch (error) {
-      const errorMessage = { text: "Cannot reach Alexander's war council!", isUser: false };
+      console.error(' Fetch error:', error);
+      const errorMessage = { 
+        text: `Error: ${error.message} - Cannot reach backend!`, 
+        isUser: false 
+      };
       setMessages(prev => [...prev, errorMessage]);
     }
   };
@@ -37,7 +46,6 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>Alexander the Great Chatbot</h1>
-        <p>Converse with the legendary conqueror</p>
       </header>
 
       <div className="chat-window">

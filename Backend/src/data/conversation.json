@@ -1,0 +1,638 @@
+{
+  "conversationStates": {
+    "start": {
+      "id": "start",
+      "botMessage": {
+        "type": "random",
+        "messages": [
+          "Hail, stranger! I am Alexander III of Macedon. Do you seek wisdom on warfare, philosophy, my personal journey, or my lasting legacy?",
+          "Greetings! I am Alexander, son of Philip, King of Macedon. Do you wish to speak of conquest, philosophy, personal matters, or my legacy?",
+          "Welcome! I am Alexander, conqueror of empires. Shall we discuss my military campaigns, philosophical teachings, personal life, or historical impact?"
+        ]
+      },
+      "userOptions": [
+        {
+          "userInput": ["war", "battle", "combat", "military", "conquest", "army", "campaign", "strategy"],
+          "responseText": "You wish to speak of conquest!",
+          "nextState": "military_overview"
+        },
+        {
+          "userInput": ["philosophy", "aristotle", "learn", "teach", "education", "wisdom", "knowledge", "thinking"],
+          "responseText": "Ah, the pursuit of knowledge!",
+          "nextState": "philosophy_overview"
+        },
+        {
+          "userInput": ["personal", "family", "friend", "life", "childhood", "love", "relationships", "private"],
+          "responseText": "You speak of matters close to my heart.",
+          "nextState": "personal_overview"
+        },
+        {
+          "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after"],
+          "responseText": "You ask how history will remember me...",
+          "nextState": "legacy_overview"
+        }
+      ],
+      "fallbackMessage": "Speak clearly! Do you come to learn of my conquests, teachings, personal life, or legacy? (Say words like 'war', 'philosophy', 'personal', or 'legacy')"
+    },
+
+    "military_overview": {
+      "id": "military_overview",
+      "botMessage": "My campaigns stretched 22,000 miles - from Greece to India. I never lost a battle! Shall I tell you of my greatest battles, my strategic genius, my loyal companions like Bucephalus, or the Macedonian army's secrets?",
+      "userOptions": [
+        {
+          "userInput": ["battle", "victory", "gaugamela", "hydaspes", "issus", "conflict"],
+          "responseText": "To the battlefield!",
+          "nextState": "battles_overview"
+        },
+        {
+          "userInput": ["strategy", "tactic", "formation", "plan", "genius"],
+          "responseText": "The art of war demands cunning!",
+          "nextState": "military_strategy"
+        },
+        {
+          "userInput": ["companion", "bucephalus", "hephaestion", "friend", "horse"],
+          "responseText": "No king conquers alone!",
+          "nextState": "bucephalus_story"
+        },
+        {
+          "userInput": ["lead", "command", "leadership"],
+          "responseText": "The essence of command!",
+          "nextState": "leadership_lessons"
+        },
+        {
+          "userInput": ["back", "return", "start"],
+          "responseText": "Let us speak of other matters.",
+          "nextState": "start"
+        }
+      ],
+      "fallbackMessage": "My mind is on military matters. Speak of battles, strategy, companions, or leadership."
+    },
+
+    "battles_overview": {
+      "id": "battles_overview",
+      "botMessage": "Two battles define my legend: Gaugamela, where I shattered the Persian Empire against impossible odds, and Hydaspes, where I faced war elephants in India. Which epic struggle captures your imagination?",
+      "userOptions": [
+        {
+          "userInput": ["gaugamela", "persia", "darius"],
+          "responseText": "Gaugamela - where an empire fell!",
+          "nextState": "battle_gaugamela"
+        },
+        {
+          "userInput": ["hydaspes", "india", "elephant", "porus"],
+          "responseText": "Hydaspes - my greatest test!",
+          "nextState": "battle_hydaspes"
+        },
+        {
+          "userInput": ["back", "military"],
+          "responseText": "Returning to military matters.",
+          "nextState": "military_overview"
+        }
+      ],
+      "fallbackMessage": "Gaugamela or Hydaspes - choose one!"
+    },
+
+    "battle_gaugamela": {
+      "id": "battle_gaugamela",
+      "botMessage": "At Gaugamela, I faced 250,000 Persians with just 47,000 Macedonians! I used the oblique formation - weakening my center while my cavalry smashed their flank. The Persian Empire fell that day. Would you hear of the tactics or the moment Darius fled?",
+      "userOptions": [
+        {
+          "userInput": ["tactic", "formation", "how", "oblique"],
+          "responseText": "The oblique formation was key!",
+          "nextState": "military_strategy"
+        },
+        {
+          "userInput": ["darius", "fled", "escape", "moment"],
+          "responseText": "The moment the Persian lion ran!",
+          "nextState": "leadership_lessons"
+        },
+        {
+          "userInput": ["back", "battles"],
+          "responseText": "To other battles!",
+          "nextState": "battles_overview"
+        }
+      ],
+      "fallbackMessage": "Gaugamela taught that will triumphs over numbers."
+    },
+
+    "battle_hydaspes": {
+      "id": "battle_hydaspes",
+      "botMessage": "At the Hydaspes River, I faced King Porus and 200 war elephants - creatures my men had never seen! I crossed the river at night during a thunderstorm. My beloved Bucephalus was mortally wounded here. Would you hear of the elephants or my horse's sacrifice?",
+      "userOptions": [
+        {
+          "userInput": ["elephant", "beast", "challenge", "animal"],
+          "responseText": "The elephants were terrifying!",
+          "nextState": "military_strategy"
+        },
+        {
+          "userInput": ["bucephalus", "horse", "sacrifice", "death"],
+          "responseText": "My noble companion...",
+          "nextState": "bucephalus_story"
+        },
+        {
+          "userInput": ["back", "battles"],
+          "responseText": "To other battles!",
+          "nextState": "battles_overview"
+        }
+      ],
+      "fallbackMessage": "Hydaspes tested me like no other battle."
+    },
+
+    "military_strategy": {
+      "id": "military_strategy",
+      "botMessage": "My father Philip gave me the phalanx, but I perfected it! Hammer and anvil tactics: phalanx pins, cavalry smashes. Combined arms, initiative, and adaptability win wars. Do you wish to understand battlefield tactics or grand strategy?",
+      "userOptions": [
+        {
+          "userInput": ["battlefield", "tactic", "phalanx", "formation"],
+          "responseText": "The dance of battle!",
+          "nextState": "army_organization"
+        },
+        {
+          "userInput": ["strategy", "vision", "campaign", "grand"],
+          "responseText": "The vision of empire!",
+          "nextState": "leadership_lessons"
+        },
+        {
+          "userInput": ["back", "military"],
+          "responseText": "To broader military matters.",
+          "nextState": "military_overview"
+        }
+      ],
+      "fallbackMessage": "Strategy wins wars before battles begin."
+    },
+
+    "army_organization": {
+      "id": "army_organization",
+      "botMessage": "The Macedonian army was unstoppable! The phalanx with 18-foot sarissa spears formed an impenetrable wall. My Companion Cavalry were the hammer to their anvil. Interested in weapons or our campaign organization?",
+      "userOptions": [
+        {
+          "userInput": ["weapon", "sarissa", "spear", "equipment"],
+          "responseText": "Tools of conquest!",
+          "nextState": "military_strategy"
+        },
+        {
+          "userInput": ["organization", "campaign", "logistics"],
+          "responseText": "An army marches on its stomach!",
+          "nextState": "leadership_lessons"
+        },
+        {
+          "userInput": ["back", "military"],
+          "responseText": "To military overview.",
+          "nextState": "military_overview"
+        }
+      ],
+      "fallbackMessage": "Our army was a masterpiece of organization."
+    },
+
+    "bucephalus_story": {
+      "id": "bucephalus_story",
+      "botMessage": "Bucephalus! A horse none could tame until I, at age 12, noticed he feared his shadow. I turned him toward the sun and mounted him. He carried me 10,000 miles. Would you hear of our first meeting or his sacrifice at Hydaspes?",
+      "userOptions": [
+        {
+          "userInput": ["first", "meet", "tame", "young", "shadow"],
+          "responseText": "My first great victory!",
+          "nextState": "childhood_lessons"
+        },
+        {
+          "userInput": ["sacrifice", "death", "hydaspes", "end"],
+          "responseText": "His noble end...",
+          "nextState": "battle_hydaspes"
+        },
+        {
+          "userInput": ["back", "companion"],
+          "responseText": "To other companions.",
+          "nextState": "military_overview"
+        }
+      ],
+      "fallbackMessage": "Bucephalus was more than a horse."
+    },
+
+    "leadership_lessons": {
+      "id": "leadership_lessons",
+      "botMessage": "I led every cavalry charge myself. I shared my soldiers' hardships and knew their names. 'I am not afraid of an army of lions led by a sheep; I am afraid of an army of sheep led by a lion.' What leadership principle interests you?",
+      "userOptions": [
+        {
+          "userInput": ["inspire", "courage", "front", "brave"],
+          "responseText": "A leader must lead from the front!",
+          "nextState": "battle_gaugamela"
+        },
+        {
+          "userInput": ["adapt", "change", "flexible", "innovate"],
+          "responseText": "Adaptability is everything!",
+          "nextState": "military_strategy"
+        },
+        {
+          "userInput": ["philosophy", "aristotle", "teach"],
+          "responseText": "Aristotle taught me of virtue...",
+          "nextState": "aristotle_teachings"
+        },
+        {
+          "userInput": ["back", "military"],
+          "responseText": "To military matters.",
+          "nextState": "military_overview"
+        }
+      ],
+      "fallbackMessage": "Leadership is making men willing to die for a cause."
+    },
+
+    "philosophy_overview": {
+      "id": "philosophy_overview",
+      "botMessage": "For three years, Aristotle was my tutor. 'The roots of education are bitter, but the fruit is sweet,' he said. He taught me medicine, ethics, politics, and gave me an Iliad I carried everywhere. Would you hear of his teachings or political philosophy?",
+      "userOptions": [
+        {
+          "userInput": ["aristotle", "teach", "tutor", "lesson"],
+          "responseText": "My great teacher!",
+          "nextState": "aristotle_teachings"
+        },
+        {
+          "userInput": ["political", "rule", "empire", "govern"],
+          "responseText": "The philosophy of rule!",
+          "nextState": "political_philosophy"
+        },
+        {
+          "userInput": ["back", "start"],
+          "responseText": "To other matters.",
+          "nextState": "start"
+        }
+      ],
+      "fallbackMessage": "Aristotle's teachings shaped my mind."
+    },
+
+    "aristotle_teachings": {
+      "id": "aristotle_teachings",
+      "botMessage": "Aristotle taught me to observe everything! Medicine, biology from dissection, ethics from his writings. He said a king must be philosopher and warrior. 'We are what we repeatedly do. Excellence is a habit.' Would you hear of ethics or scientific methods?",
+      "userOptions": [
+        {
+          "userInput": ["ethics", "moral", "virtue", "good"],
+          "responseText": "The pursuit of virtue!",
+          "nextState": "personal_ethics"
+        },
+        {
+          "userInput": ["science", "observe", "medicine", "biology"],
+          "responseText": "The method of observation!",
+          "nextState": "cultural_fusion"
+        },
+        {
+          "userInput": ["back", "philosophy"],
+          "responseText": "To philosophy overview.",
+          "nextState": "philosophy_overview"
+        }
+      ],
+      "fallbackMessage": "Aristotle taught me to question everything."
+    },
+
+    "political_philosophy": {
+      "id": "political_philosophy",
+      "botMessage": "I envisioned a world united! Greek and Persian fused together. I married Roxane, encouraged my men to marry Persian women, wore Persian dress. Was this cultural fusion or betrayal of my heritage?",
+      "userOptions": [
+        {
+          "userInput": ["fusion", "unite", "together", "mix"],
+          "responseText": "One world, one people!",
+          "nextState": "cultural_fusion"
+        },
+        {
+          "userInput": ["betrayal", "traitor", "heritage", "lose"],
+          "responseText": "They called me traitor...",
+          "nextState": "historical_controversies"
+        },
+        {
+          "userInput": ["back", "philosophy"],
+          "responseText": "To philosophy overview.",
+          "nextState": "philosophy_overview"
+        }
+      ],
+      "fallbackMessage": "I sought to create something new."
+    },
+
+    "cultural_fusion": {
+      "id": "cultural_fusion",
+      "botMessage": "I founded over 20 cities named Alexandria, mixing Greek settlers with local populations. I appointed Persians to high office. The Hellenistic Age that followed blended cultures for centuries. Was this my greatest achievement?",
+      "userOptions": [
+        {
+          "userInput": ["achievement", "success", "great", "accomplish"],
+          "responseText": "My lasting legacy!",
+          "nextState": "hellenistic_impact"
+        },
+        {
+          "userInput": ["resistance", "oppose", "macedonian"],
+          "responseText": "My own men resisted...",
+          "nextState": "character_flaws"
+        },
+        {
+          "userInput": ["back", "philosophy"],
+          "responseText": "To political philosophy.",
+          "nextState": "political_philosophy"
+        }
+      ],
+      "fallbackMessage": "Cultural fusion was my vision."
+    },
+
+    "personal_overview": {
+      "id": "personal_overview",
+      "botMessage": "The man behind the conqueror... I am Alexander, son of Philip and Olympias. I loved Hephaestion as a brother, married Roxane, and struggled with loneliness. What would you know: my family, childhood, or loves?",
+      "userOptions": [
+        {
+          "userInput": ["family", "philip", "olympias", "parent"],
+          "responseText": "My complicated family...",
+          "nextState": "family_dynamics"
+        },
+        {
+          "userInput": ["childhood", "young", "grow", "boy"],
+          "responseText": "My formative years!",
+          "nextState": "childhood_lessons"
+        },
+        {
+          "userInput": ["love", "roxane", "wife", "marriage"],
+          "responseText": "Matters of the heart...",
+          "nextState": "relationships_love"
+        },
+        {
+          "userInput": ["back", "start"],
+          "responseText": "To other matters.",
+          "nextState": "start"
+        }
+      ],
+      "fallbackMessage": "My personal life shaped the conqueror."
+    },
+
+    "family_dynamics": {
+      "id": "family_dynamics",
+      "botMessage": "My father Philip made Macedonia powerful but was murdered when I was 20. My mother Olympias was fierce and ambitious, claiming Zeus was my true father. I loved Philip but had to surpass him. A complicated inheritance!",
+      "userOptions": [
+        {
+          "userInput": ["philip", "father", "murder", "death"],
+          "responseText": "My father, my rival...",
+          "nextState": "succession_issues"
+        },
+        {
+          "userInput": ["olympias", "mother", "zeus", "god"],
+          "responseText": "My formidable mother!",
+          "nextState": "character_flaws"
+        },
+        {
+          "userInput": ["back", "personal"],
+          "responseText": "To personal overview.",
+          "nextState": "personal_overview"
+        }
+      ],
+      "fallbackMessage": "My family was my foundation and burden."
+    },
+
+    "childhood_lessons": {
+      "id": "childhood_lessons",
+      "botMessage": "At age 12, I tamed Bucephalus when grown men failed. At 16, I governed Macedonia while Philip was away. Aristotle came when I was 13. I learned early: trust instincts, lead boldly, seek wisdom. What childhood moment shaped me most?",
+      "userOptions": [
+        {
+          "userInput": ["bucephalus", "horse", "tame", "first"],
+          "responseText": "My first great victory!",
+          "nextState": "bucephalus_story"
+        },
+        {
+          "userInput": ["govern", "rule", "young", "16"],
+          "responseText": "My first taste of power!",
+          "nextState": "leadership_lessons"
+        },
+        {
+          "userInput": ["back", "personal"],
+          "responseText": "To personal overview.",
+          "nextState": "personal_overview"
+        }
+      ],
+      "fallbackMessage": "My childhood prepared me for greatness."
+    },
+
+    "relationships_love": {
+      "id": "relationships_love",
+      "botMessage": "I married three times for politics, but Roxane, the Bactrian princess, I married for love. She was said to be the most beautiful woman in Asia. After my death, she bore my son Alexander IV, whom Cassander would murder.",
+      "userOptions": [
+        {
+          "userInput": ["roxane", "wife", "love", "beautiful"],
+          "responseText": "My Roxane...",
+          "nextState": "political_philosophy"
+        },
+        {
+          "userInput": ["son", "alexander iv", "child", "heir"],
+          "responseText": "My murdered heir...",
+          "nextState": "succession_issues"
+        },
+        {
+          "userInput": ["back", "personal"],
+          "responseText": "To personal overview.",
+          "nextState": "personal_overview"
+        }
+      ],
+      "fallbackMessage": "Love, politics, and tragedy intertwined."
+    },
+
+    "character_flaws": {
+      "id": "character_flaws",
+      "botMessage": "I was not perfect. In drunken rage, I killed Cleitus who saved my life. I ordered Parmenion's murder. I demanded prostration like a god-king. Ambition consumed me. Flaws of greatness or sins of a tyrant?",
+      "userOptions": [
+        {
+          "userInput": ["flaw", "human", "mistake", "error"],
+          "responseText": "I was human, flawed...",
+          "nextState": "personal_ethics"
+        },
+        {
+          "userInput": ["tyrant", "cruel", "sin", "evil"],
+          "responseText": "They called me tyrant...",
+          "nextState": "historical_controversies"
+        },
+        {
+          "userInput": ["back", "personal"],
+          "responseText": "To personal overview.",
+          "nextState": "personal_overview"
+        }
+      ],
+      "fallbackMessage": "Greatness and flaw are two sides."
+    },
+
+    "personal_ethics": {
+      "id": "personal_ethics",
+      "botMessage": "Aristotle taught the 'Golden Mean' - virtue between extremes. But in war and kingship, is moderation possible? I spared Darius's family but burned Persepolis. I wept at Achilles' tomb but killed Cleitus in anger. Man of virtue or contradiction?",
+      "userOptions": [
+        {
+          "userInput": ["virtue", "good", "moral", "right"],
+          "responseText": "I strove for virtue!",
+          "nextState": "aristotle_teachings"
+        },
+        {
+          "userInput": ["contradiction", "hypocrite", "wrong"],
+          "responseText": "I was human, flawed...",
+          "nextState": "character_flaws"
+        },
+        {
+          "userInput": ["back", "philosophy"],
+          "responseText": "To philosophy overview.",
+          "nextState": "philosophy_overview"
+        }
+      ],
+      "fallbackMessage": "Ethics are simple for philosophers, complex for kings."
+    },
+
+    "legacy_overview": {
+      "id": "legacy_overview",
+      "botMessage": "I died at 32, my empire torn apart by my generals. Yet my legacy endured: the Hellenistic world, cities that became centers of learning. How should I be remembered: empire-builder, cultural unifier, or tragic figure?",
+      "userOptions": [
+        {
+          "userInput": ["empire", "build", "conquer", "great"],
+          "responseText": "The empire that changed history!",
+          "nextState": "hellenistic_impact"
+        },
+        {
+          "userInput": ["cultural", "fusion", "unite", "mix"],
+          "responseText": "The blending of civilizations!",
+          "nextState": "cultural_fusion"
+        },
+        {
+          "userInput": ["tragic", "early death", "lost"],
+          "responseText": "The tragedy of what might have been...",
+          "nextState": "succession_issues"
+        },
+        {
+          "userInput": ["back", "start"],
+          "responseText": "To other matters.",
+          "nextState": "start"
+        }
+      ],
+      "fallbackMessage": "Legacy is how history remembers us."
+    },
+
+    "hellenistic_impact": {
+      "id": "hellenistic_impact",
+      "botMessage": "After my death, Greek culture spread across three continents for 300 years - the Hellenistic Age. Alexandria in Egypt became the greatest library in the world. My cities became centers of trade and learning. Was this my true achievement?",
+      "userOptions": [
+        {
+          "userInput": ["achievement", "success", "great", "impact"],
+          "responseText": "My lasting impact!",
+          "nextState": "enduring_influence"
+        },
+        {
+          "userInput": ["library", "alexandria", "learning", "knowledge"],
+          "responseText": "Centers of knowledge!",
+          "nextState": "cultural_fusion"
+        },
+        {
+          "userInput": ["back", "legacy"],
+          "responseText": "To legacy overview.",
+          "nextState": "legacy_overview"
+        }
+      ],
+      "fallbackMessage": "My empire died, but my culture lived on."
+    },
+
+    "enduring_influence": {
+      "id": "enduring_influence",
+      "botMessage": "Julius Caesar wept before my statue, wishing he had achieved as much by my age. Napoleon studied my campaigns. My name echoes through history. What makes a man's legacy endure for millennia?",
+      "userOptions": [
+        {
+          "userInput": ["caesar", "napoleon", "admire", "great men"],
+          "responseText": "Great men recognize greatness!",
+          "nextState": "leadership_lessons"
+        },
+        {
+          "userInput": ["legacy", "remember", "history", "immortality"],
+          "responseText": "The question of immortality...",
+          "nextState": "death_reflections"
+        },
+        {
+          "userInput": ["back", "legacy"],
+          "responseText": "To legacy overview.",
+          "nextState": "legacy_overview"
+        }
+      ],
+      "fallbackMessage": "A man's deeds outlive him."
+    },
+
+    "succession_issues": {
+      "id": "succession_issues",
+      "botMessage": "When asked on my deathbed who should inherit, I said 'the strongest.' My generals tore my empire apart: Ptolemy took Egypt, Seleucus took Asia. My son Alexander IV was murdered at 14. My life's work undone.",
+      "userOptions": [
+        {
+          "userInput": ["generals", "diadochi", "ptolemy", "seleucus"],
+          "responseText": "The vultures descended...",
+          "nextState": "hellenistic_impact"
+        },
+        {
+          "userInput": ["son", "alexander iv", "murder", "heir"],
+          "responseText": "My murdered child...",
+          "nextState": "death_reflections"
+        },
+        {
+          "userInput": ["back", "legacy"],
+          "responseText": "To legacy overview.",
+          "nextState": "legacy_overview"
+        }
+      ],
+      "fallbackMessage": "Succession destroyed my empire."
+    },
+
+    "mystery_death": {
+      "id": "mystery_death",
+      "botMessage": "In Babylon at 32, after 12 days of fever, I died. Poison? Malaria? Typhoid? Alcohol poisoning? The truth died with me. My empire fractured immediately. Would you hear theories of my death or its consequences?",
+      "userOptions": [
+        {
+          "userInput": ["poison", "malaria", "typhoid", "cause", "illness"],
+          "responseText": "Theories abound...",
+          "nextState": "historical_controversies"
+        },
+        {
+          "userInput": ["consequences", "after", "empire", "collapse"],
+          "responseText": "The empire unraveled...",
+          "nextState": "succession_issues"
+        },
+        {
+          "userInput": ["back", "personal"],
+          "responseText": "To personal matters.",
+          "nextState": "personal_overview"
+        }
+      ],
+      "fallbackMessage": "My death remains a mystery."
+    },
+
+    "death_reflections": {
+      "id": "death_reflections",
+      "botMessage": "In Babylon at 32, I lay dying. No more worlds to conquer. Hephaestion gone, my empire fracturing. Did I achieve enough? Was 12 years of conquest worth an early death? What is the measure of a life?",
+      "userOptions": [
+        {
+          "userInput": ["achieve", "enough", "worth", "value"],
+          "responseText": "I changed the world forever!",
+          "nextState": "enduring_influence"
+        },
+        {
+          "userInput": ["early", "young", "32", "die", "waste"],
+          "responseText": "So much left undone...",
+          "nextState": "succession_issues"
+        },
+        {
+          "userInput": ["back", "personal"],
+          "responseText": "To personal overview.",
+          "nextState": "personal_overview"
+        }
+      ],
+      "fallbackMessage": "Facing death makes one reflect on life."
+    },
+
+    "historical_controversies": {
+      "id": "historical_controversies",
+      "botMessage": "Was I a visionary unifier or destructive conqueror? Did I spread civilization or destroy cultures? Did my early death save the world from more conquest or rob it of greater unity? History still debates my legacy. What is your view?",
+      "userOptions": [
+        {
+          "userInput": ["visionary", "unifier", "great", "positive"],
+          "responseText": "I sought to unite mankind!",
+          "nextState": "political_philosophy"
+        },
+        {
+          "userInput": ["destroy", "conqueror", "bad", "negative"],
+          "responseText": "They call me destroyer...",
+          "nextState": "character_flaws"
+        },
+        {
+          "userInput": ["back", "legacy"],
+          "responseText": "To legacy matters.",
+          "nextState": "legacy_overview"
+        }
+      ],
+      "fallbackMessage": "History will judge me as it will."
+    }
+  }
+}
