@@ -12,7 +12,7 @@
       },
    "userOptions": [
   {
-    "userInput": ["hello", "hi there", "hey", "greetings", "hail", "yo"],
+    "userInput": ["hello", "hi there", "hey", "greetings", "hail"],
     "responseText": "A warm greeting to you, traveler!",
     "nextState": "start"
   },
@@ -22,17 +22,17 @@
     "nextState": "military_overview"
   },
   {
-    "userInput": ["philosophy", "aristotle", "learn", "teach", "education", "wisdom", "knowledge", "thinking"],
+    "userInput": ["philosophical", "philosophy", "aristotle", "learn", "teachings", "teacher", "education", "wisdom", "knowledge", "thinking"],
     "responseText": "Ah, the pursuit of knowledge!",
     "nextState": "philosophy_overview"
   },
   {
-    "userInput": ["personal", "family", "friend", "life", "childhood", "love", "relationships", "private"],
+    "userInput": ["personal","life", "family", "friend", "life", "childhood", "love", "relationships", "private"],
     "responseText": "You speak of matters close to my heart.",
     "nextState": "personal_overview"
   },
   {
-    "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after"],
+    "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after", "historical impact"],
     "responseText": "You ask how history will remember me...",
     "nextState": "legacy_overview"
   }
@@ -51,7 +51,7 @@
           "nextState": "battles_overview"
         },
         {
-          "userInput": ["strategy", "tactic", "formation", "plan", "genius"],
+          "userInput": ["strategy", "strategic", "tactic", "formation", "plan", "genius"],
           "responseText": "The art of war demands cunning!",
           "nextState": "military_strategy"
         },
@@ -490,12 +490,12 @@
           "nextState": "hellenistic_impact"
         },
         {
-          "userInput": ["cultural", "fusion", "unite", "mix"],
+          "userInput": ["cultural", "fusion", "unite", "unity", "mix", "unifier"],
           "responseText": "The blending of civilizations!",
           "nextState": "cultural_fusion"
         },
         {
-          "userInput": ["tragic", "early death", "lost", "die"],
+          "userInput": ["tragic", "early death", "lost", "die", "tragedy"],
           "responseText": "The tragedy of what might have been...",
           "nextState": "succession_issues"
         },
