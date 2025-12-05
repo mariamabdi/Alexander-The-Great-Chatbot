@@ -10,28 +10,34 @@
           "Welcome! I am Alexander, conqueror of empires. Shall we discuss my military campaigns, philosophical teachings, personal life, or historical impact?"
         ]
       },
-      "userOptions": [
-        {
-          "userInput": ["war", "battle", "combat", "military", "conquest", "army", "campaign", "strategy"],
-          "responseText": "You wish to speak of conquest!",
-          "nextState": "military_overview"
-        },
-        {
-          "userInput": ["philosophy", "aristotle", "learn", "teach", "education", "wisdom", "knowledge", "thinking"],
-          "responseText": "Ah, the pursuit of knowledge!",
-          "nextState": "philosophy_overview"
-        },
-        {
-          "userInput": ["personal", "family", "friend", "life", "childhood", "love", "relationships", "private"],
-          "responseText": "You speak of matters close to my heart.",
-          "nextState": "personal_overview"
-        },
-        {
-          "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after"],
-          "responseText": "You ask how history will remember me...",
-          "nextState": "legacy_overview"
-        }
-      ],
+   "userOptions": [
+  {
+    "userInput": ["hello", "hi there", "hey", "greetings", "hail", "yo"],
+    "responseText": "A warm greeting to you, traveler!",
+    "nextState": "start"
+  },
+  {
+    "userInput": ["war", "battle", "combat", "military", "conquest", "army", "campaign", "strategy"],
+    "responseText": "You wish to speak of conquest!",
+    "nextState": "military_overview"
+  },
+  {
+    "userInput": ["philosophy", "aristotle", "learn", "teach", "education", "wisdom", "knowledge", "thinking"],
+    "responseText": "Ah, the pursuit of knowledge!",
+    "nextState": "philosophy_overview"
+  },
+  {
+    "userInput": ["personal", "family", "friend", "life", "childhood", "love", "relationships", "private"],
+    "responseText": "You speak of matters close to my heart.",
+    "nextState": "personal_overview"
+  },
+  {
+    "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after"],
+    "responseText": "You ask how history will remember me...",
+    "nextState": "legacy_overview"
+  }
+]
+,
       "fallbackMessage": "Speak clearly! Do you come to learn of my conquests, teachings, personal life, or legacy? (Say words like 'war', 'philosophy', 'personal', or 'legacy')"
     },
 
@@ -244,7 +250,7 @@
           "nextState": "aristotle_teachings"
         },
         {
-          "userInput": ["political", "rule", "empire", "govern"],
+          "userInput": ["political", "rule", "empire", "govern", "politics"],
           "responseText": "The philosophy of rule!",
           "nextState": "political_philosophy"
         },
