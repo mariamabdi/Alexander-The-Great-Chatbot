@@ -6,7 +6,9 @@
     "start": "node src/server.js"
   },
   "dependencies": {
-    "express": "^4.18.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.22.1",
+    "groq-sdk": "^0.37.0"
   }
 }

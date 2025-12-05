@@ -1,45 +1,63 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./App.css";
 
 function App() {
   const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
+  const sessionId = "user123"; 
+  const messagesEndRef = useRef(null);
 
+  // Auto-scroll
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  // Load start message from backend
+  useEffect(() => {
+    async function loadStart() {
+      try {
+        const res = await fetch("http://localhost:9996/api/start");
+        const data = await res.json();
+        setMessages([{ text: data.botMessage, isUser: false }]);
+      } catch (err) {
+        console.error("Start message error:", err);
+      }
+    }
+    loadStart();
+  }, []);
+
+  // Send message to backend
   const sendMessage = async () => {
     if (!inputText.trim()) return;
 
-    const userMessage = { text: inputText, isUser: true };
-    setMessages(prev => [...prev, userMessage]);
-    setInputText('');
+    const userMsg = { text: inputText, isUser: true };
+    setMessages((m) => [...m, userMsg]);
 
     try {
-      console.log(' Sending to backend:', inputText);
-      const response = await fetch('http://localhost:3000/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: inputText, sessionId: 'user123' })
+      const res = await fetch("http://localhost:9996/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: inputText,
+          sessionId: sessionId
+        })
       });
-      
-      console.log(' Response status:', response.status);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      console.log(' Response data:', data);
-      
-      const botMessage = { text: data.botMessage, isUser: false };
-      setMessages(prev => [...prev, botMessage]);
-      
-    } catch (error) {
-      console.error(' Fetch error:', error);
-      const errorMessage = { 
-        text: `Error: ${error.message} - Cannot reach backend!`, 
-        isUser: false 
-      };
-      setMessages(prev => [...prev, errorMessage]);
+
+      const data = await res.json();
+      const botMsg = { text: data.botMessage, isUser: false };
+      setMessages((m) => [...m, botMsg]);
+
+    } catch (err) {
+      console.error("Chat error:", err);
+      setMessages((m) => [
+        ...m,
+        { text: "Backend error — cannot connect.", isUser: false }
+      ]);
     }
+
+    setInputText("");
   };
 
   return (
@@ -50,20 +68,24 @@ function App() {
 
       <div className="chat-window">
         <div className="messages">
-          {messages.map((msg, index) => (
-            <div key={index} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`message ${msg.isUser ? "user" : "bot"}`}
+            >
               {msg.text}
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
-        
+
         <div className="input-area">
           <input
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="Ask Alexander a question..."
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="Ask Alexander anything..."
           />
           <button onClick={sendMessage}>Send</button>
         </div>

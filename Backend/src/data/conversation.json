@@ -1,5 +1,5 @@
 {
-  "conversationStates": {
+   "conversationStates": {
     "start": {
       "id": "start",
       "botMessage": {
@@ -331,7 +331,7 @@
       "botMessage": "The man behind the conqueror... I am Alexander, son of Philip and Olympias. I loved Hephaestion as a brother, married Roxane, and struggled with loneliness. What would you know: my family, childhood, or loves?",
       "userOptions": [
         {
-          "userInput": ["family", "philip", "olympias", "parent"],
+          "userInput": ["philip", "olympias", "parent", "family"],
           "responseText": "My complicated family...",
           "nextState": "family_dynamics"
         },
@@ -349,6 +349,11 @@
           "userInput": ["back", "start"],
           "responseText": "To other matters.",
           "nextState": "start"
+        },
+        {
+          "userInput": ["journeys", "personal", "life" ],
+          "responseText": "Ah, the great story that is my life!.",
+          "nextState": "legacy_overview"
         }
       ],
       "fallbackMessage": "My personal life shaped the conqueror."
@@ -359,7 +364,7 @@
       "botMessage": "My father Philip made Macedonia powerful but was murdered when I was 20. My mother Olympias was fierce and ambitious, claiming Zeus was my true father. I loved Philip but had to surpass him. A complicated inheritance!",
       "userOptions": [
         {
-          "userInput": ["philip", "father", "murder", "death"],
+          "userInput": ["philip", "father", "murder", "death", "family"],
           "responseText": "My father, my rival...",
           "nextState": "succession_issues"
         },
@@ -451,7 +456,7 @@
       "botMessage": "Aristotle taught the 'Golden Mean' - virtue between extremes. But in war and kingship, is moderation possible? I spared Darius's family but burned Persepolis. I wept at Achilles' tomb but killed Cleitus in anger. Man of virtue or contradiction?",
       "userOptions": [
         {
-          "userInput": ["virtue", "good", "moral", "right"],
+          "userInput": ["virtue","virtuous", "good", "moral", "right"],
           "responseText": "I strove for virtue!",
           "nextState": "aristotle_teachings"
         },
@@ -484,7 +489,7 @@
           "nextState": "cultural_fusion"
         },
         {
-          "userInput": ["tragic", "early death", "lost"],
+          "userInput": ["tragic", "early death", "lost", "die"],
           "responseText": "The tragedy of what might have been...",
           "nextState": "succession_issues"
         },
