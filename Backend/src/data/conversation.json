@@ -1,5 +1,5 @@
 {
-  "conversationStates": {
+   "conversationStates": {
     "start": {
       "id": "start",
       "botMessage": {
@@ -10,28 +10,34 @@
           "Welcome! I am Alexander, conqueror of empires. Shall we discuss my military campaigns, philosophical teachings, personal life, or historical impact?"
         ]
       },
-      "userOptions": [
-        {
-          "userInput": ["war", "battle", "combat", "military", "conquest", "army", "campaign", "strategy"],
-          "responseText": "You wish to speak of conquest!",
-          "nextState": "military_overview"
-        },
-        {
-          "userInput": ["philosophy", "aristotle", "learn", "teach", "education", "wisdom", "knowledge", "thinking"],
-          "responseText": "Ah, the pursuit of knowledge!",
-          "nextState": "philosophy_overview"
-        },
-        {
-          "userInput": ["personal", "family", "friend", "life", "childhood", "love", "relationships", "private"],
-          "responseText": "You speak of matters close to my heart.",
-          "nextState": "personal_overview"
-        },
-        {
-          "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after"],
-          "responseText": "You ask how history will remember me...",
-          "nextState": "legacy_overview"
-        }
-      ],
+   "userOptions": [
+  {
+    "userInput": ["hello", "hi there", "hey", "greetings", "hail"],
+    "responseText": "A warm greeting to you, traveler!",
+    "nextState": "start"
+  },
+  {
+    "userInput": ["war", "battle", "combat", "military", "conquest", "army", "campaign", "strategy"],
+    "responseText": "You wish to speak of conquest!",
+    "nextState": "military_overview"
+  },
+  {
+    "userInput": ["philosophical", "philosophy", "aristotle", "learn", "teachings", "teacher", "education", "wisdom", "knowledge", "thinking"],
+    "responseText": "Ah, the pursuit of knowledge!",
+    "nextState": "philosophy_overview"
+  },
+  {
+    "userInput": ["personal","life", "family", "friend", "life", "childhood", "love", "relationships", "private"],
+    "responseText": "You speak of matters close to my heart.",
+    "nextState": "personal_overview"
+  },
+  {
+    "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after", "historical impact"],
+    "responseText": "You ask how history will remember me...",
+    "nextState": "legacy_overview"
+  }
+]
+,
       "fallbackMessage": "Speak clearly! Do you come to learn of my conquests, teachings, personal life, or legacy? (Say words like 'war', 'philosophy', 'personal', or 'legacy')"
     },
 
@@ -45,7 +51,7 @@
           "nextState": "battles_overview"
         },
         {
-          "userInput": ["strategy", "tactic", "formation", "plan", "genius"],
+          "userInput": ["strategy", "strategic", "tactic", "formation", "plan", "genius"],
           "responseText": "The art of war demands cunning!",
           "nextState": "military_strategy"
         },
@@ -244,7 +250,7 @@
           "nextState": "aristotle_teachings"
         },
         {
-          "userInput": ["political", "rule", "empire", "govern"],
+          "userInput": ["political", "rule", "empire", "govern", "politics"],
           "responseText": "The philosophy of rule!",
           "nextState": "political_philosophy"
         },
@@ -331,7 +337,7 @@
       "botMessage": "The man behind the conqueror... I am Alexander, son of Philip and Olympias. I loved Hephaestion as a brother, married Roxane, and struggled with loneliness. What would you know: my family, childhood, or loves?",
       "userOptions": [
         {
-          "userInput": ["family", "philip", "olympias", "parent"],
+          "userInput": ["philip", "olympias", "parent", "family"],
           "responseText": "My complicated family...",
           "nextState": "family_dynamics"
         },
@@ -349,6 +355,11 @@
           "userInput": ["back", "start"],
           "responseText": "To other matters.",
           "nextState": "start"
+        },
+        {
+          "userInput": ["journeys", "personal", "life" ],
+          "responseText": "Ah, the great story that is my life!.",
+          "nextState": "legacy_overview"
         }
       ],
       "fallbackMessage": "My personal life shaped the conqueror."
@@ -359,7 +370,7 @@
       "botMessage": "My father Philip made Macedonia powerful but was murdered when I was 20. My mother Olympias was fierce and ambitious, claiming Zeus was my true father. I loved Philip but had to surpass him. A complicated inheritance!",
       "userOptions": [
         {
-          "userInput": ["philip", "father", "murder", "death"],
+          "userInput": ["philip", "father", "murder", "death", "family"],
           "responseText": "My father, my rival...",
           "nextState": "succession_issues"
         },
@@ -451,7 +462,7 @@
       "botMessage": "Aristotle taught the 'Golden Mean' - virtue between extremes. But in war and kingship, is moderation possible? I spared Darius's family but burned Persepolis. I wept at Achilles' tomb but killed Cleitus in anger. Man of virtue or contradiction?",
       "userOptions": [
         {
-          "userInput": ["virtue", "good", "moral", "right"],
+          "userInput": ["virtue","virtuous", "good", "moral", "right"],
           "responseText": "I strove for virtue!",
           "nextState": "aristotle_teachings"
         },
@@ -479,12 +490,12 @@
           "nextState": "hellenistic_impact"
         },
         {
-          "userInput": ["cultural", "fusion", "unite", "mix"],
+          "userInput": ["cultural", "fusion", "unite", "unity", "mix", "unifier"],
           "responseText": "The blending of civilizations!",
           "nextState": "cultural_fusion"
         },
         {
-          "userInput": ["tragic", "early death", "lost"],
+          "userInput": ["tragic", "early death", "lost", "die", "tragedy"],
           "responseText": "The tragedy of what might have been...",
           "nextState": "succession_issues"
         },

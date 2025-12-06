@@ -8,12 +8,8 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.22.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.22.1",
     "groq-sdk": "^0.37.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.11"
   }
 }
-
