@@ -6,6 +6,10 @@ import dotenv from "dotenv";
 import Groq from "groq-sdk";
 import { fileURLToPath } from "url";
 
+app.get("/", (req, res) => {
+  res.send("Backend is running on port 9990!");
+});
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
