@@ -6,9 +6,6 @@ import dotenv from "dotenv";
 import Groq from "groq-sdk";
 import { fileURLToPath } from "url";
 
-app.get("/", (req, res) => {
-  res.send("Backend is running on port 9990!");
-});
 
 dotenv.config();
 
@@ -146,6 +143,9 @@ app.post("/api/chat", async (req, res) => {
     botMessage: (stateObj.fallbackMessage || "I do not understand.") + "\n\n" + aiReply,
     nextState: state,
   });
+});
+app.get("/", (req, res) => {
+  res.send("Backend is running on port 9990!");
 });
 
 app.listen(PORT, () => {
