@@ -4,8 +4,13 @@ import "./App.css";
 function App() {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
-  const sessionId = "user123"; 
   const messagesEndRef = useRef(null);
+// Generate a persistent session ID for this user
+  let sessionId = localStorage.getItem("sessionId");
+  if (!sessionId) {
+    sessionId = Math.random().toString(36).substring(2, 15); // simple unique ID
+    localStorage.setItem("sessionId", sessionId);
+  }
 
   // Auto-scroll
   useEffect(() => {
