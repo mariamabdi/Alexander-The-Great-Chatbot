@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alexander  The Great Chatbot</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander the Great</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Alexander the Great</h1>
+        <button class="restart-btn">RESTART</button>
+    </header>
+
+    <nav class="sub-nav">
+        <a href="#" class="nav-link">Menu</a>
+        <a href="#" class="nav-link">About Us</a>
+        <a href="#" class="nav-link">Contact</a>
+    </nav>
+    
+    <main class="chat-container">
+
+        <div class="message-box alexander">
+            <p>I am Alexander, son of Philip. What knowledge you seek of my conquests?</p>
+            <div class="options">
+                <button>Tell me more</button>
+                <button>Where is Persia?</button>
+            </div>
+        </div>
+
+        <div class="message-box user">
+            <p>Tell me about the Battle of Gaugamela</p>
+        </div>
+
+    </main>
+
+    <footer class="input-bar">
+        <input type="text" placeholder="Ask Alexander a question...">
+        <button class="send-btn">➤</button>
+    </footer>
+
+</body>
 </html>
