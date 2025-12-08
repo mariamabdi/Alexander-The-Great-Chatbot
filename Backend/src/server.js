@@ -6,20 +6,20 @@ import dotenv from "dotenv";
 import Groq from "groq-sdk";
 import { fileURLToPath } from "url";
 
-
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config();
 const app = express();
 const PORT = 9990;
 
 app.use(cors());
 app.use(express.json());
 
+// ----------------------------
 // Load JSON conversation file
+// ----------------------------
 let conversationData = null;
 try {
   const filePath = path.join(__dirname, "data", "conversation.json");
@@ -30,20 +30,27 @@ try {
   console.error("Error loading conversation.json:", err);
 }
 
+// ----------------------------
 // Track user sessions
+// ----------------------------
 const sessions = {};
 
+// ----------------------------
 // Groq LLM setup
+// ----------------------------
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
 const alexanderPrompt = `
 You are Alexander the Great — the conqueror, strategist, and philosopher-king.
-Speak boldly and remain in character. If the user asks something unrelated to the scripted paths, reply naturally as Alexander.
+Speak boldly, dramatically, and in character. 
+If the user asks anything outside the scripted flow, you must answer naturally as Alexander.
 `;
 
-// Ask Groq LLM
+// ----------------------------
+// Ask Groq (LLM fallback function)
+// ----------------------------
 async function askGroq(message) {
   try {
     const completion = await groq.chat.completions.create({
@@ -63,7 +70,9 @@ async function askGroq(message) {
   }
 }
 
-// First message shown on chatbot start
+// ----------------------------
+// Start endpoint
+// ----------------------------
 app.get("/api/start", (req, res) => {
   const start = conversationData.conversationStates.start;
 
@@ -77,7 +86,9 @@ app.get("/api/start", (req, res) => {
   res.json({ botMessage: msg });
 });
 
-// Main chat route
+// ----------------------------
+// Main Chat Route
+// ----------------------------
 app.post("/api/chat", async (req, res) => {
   const { message, sessionId } = req.body;
 
@@ -85,7 +96,7 @@ app.post("/api/chat", async (req, res) => {
     return res.status(400).json({ botMessage: "Missing sessionId." });
   }
 
-  // Create session if it doesn't exist
+  // Create session if needed
   if (!sessions[sessionId]) {
     sessions[sessionId] = { currentState: "start" };
   }
@@ -93,15 +104,19 @@ app.post("/api/chat", async (req, res) => {
   let state = sessions[sessionId].currentState;
   const states = conversationData.conversationStates;
 
+  // Safety: if state doesn't exist, reset
   if (!states[state]) {
     state = "start";
+    sessions[sessionId].currentState = "start";
   }
 
   const stateObj = states[state];
   const userText = message.toLowerCase();
   let match = null;
 
-  // Keyword matching
+  // ----------------------------
+  // JSON keyword matching logic
+  // ----------------------------
   for (const option of stateObj.userOptions) {
     for (const keyword of option.userInput) {
       if (userText.includes(keyword.toLowerCase())) {
@@ -112,7 +127,9 @@ app.post("/api/chat", async (req, res) => {
     if (match) break;
   }
 
-  // If a state option matched
+  // ----------------------------
+  // If keyword/stated matched
+  // ----------------------------
   if (match) {
     const next = match.nextState;
     sessions[sessionId].currentState = next;
@@ -136,18 +153,26 @@ app.post("/api/chat", async (req, res) => {
     });
   }
 
-  // If no match found, use LLM fallback
+  // ----------------------------
+  // No match? → GROQ FALLBACK
+  // ----------------------------
   const aiReply = await askGroq(message);
 
   return res.json({
-    botMessage: (stateObj.fallbackMessage || "I do not understand.") + "\n\n" + aiReply,
-    nextState: state,
+    botMessage:
+      (stateObj.fallbackMessage || "I do not understand your words.") +
+      "\n\n" +
+      aiReply,
+    nextState: state, // stays in current state
   });
 });
+
+// ----------------------------
 app.get("/", (req, res) => {
   res.send("Backend is running on port 9990!");
 });
 
+// ----------------------------
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
