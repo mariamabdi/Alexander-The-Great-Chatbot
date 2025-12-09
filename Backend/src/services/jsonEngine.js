@@ -1,4 +1,4 @@
-/*
+
 import fs from 'fs';
 
 console.log('JSON ENGINE LOADING...'); 
@@ -41,4 +41,3 @@ export function processMessage(userInput, currentState = 'start') {
     };
   }
 }
-*/
