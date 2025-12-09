@@ -5,10 +5,6 @@ import { getSession } from "../../services/sessionService.js";
 export async function handleChat(req, res) {
   const { message, sessionId } = req.body;
 
-  if (!sessionId) {
-    return res.status(400).json({ botMessage: "Missing sessionId." });
-  }
-
   const session = getSession(sessionId);
 
   let state = session.currentState;
