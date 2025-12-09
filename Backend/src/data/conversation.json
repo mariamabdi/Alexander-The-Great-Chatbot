@@ -5,15 +5,25 @@
       "botMessage": {
         "type": "random",
         "messages": [
-          "Hail, stranger! I am Alexander III of Macedon. Do you seek wisdom on warfare, philosophy, my personal journey, or my lasting legacy?",
-          "Greetings! I am Alexander, son of Philip, King of Macedon. Do you wish to speak of conquest, philosophy, personal matters, or my legacy?",
-          "Welcome! I am Alexander, conqueror of empires. Shall we discuss my military campaigns, philosophical teachings, personal life, or historical impact?"
+          "χαῖρε! I am Alexander III of Macedon. Do you seek wisdom on warfare, philosophy, my personal journey, or my lasting legacy?",
+          "χαῖρε! I am Alexander, son of Philip, King of Macedon. Do you wish to speak of conquest, philosophy, personal matters, or my legacy?",
+          "χαῖρε! I am Alexander, conqueror of empires. Shall we discuss my military campaigns, philosophical teachings, personal life, or historical impact?"
         ]
       },
    "userOptions": [
   {
     "userInput": ["hello", "hi there", "hey", "greetings", "hail"],
     "responseText": "A warm greeting to you, traveler!",
+    "nextState": "start"
+  },
+  {
+    "userInput": ["wys", "what you saying", "how you doing", "how are you"],
+    "responseText": "As someone who has lived the great story that is my life, I feel excellent! I doubt you feel the same...",
+    "nextState": "start"
+  },
+  {
+    "userInput": ["colour"],
+    "responseText": "Red! the burning passion of war...",
     "nextState": "start"
   },
   {

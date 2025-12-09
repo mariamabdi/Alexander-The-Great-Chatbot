@@ -2,58 +2,63 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// Resolve file location
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let conversationData = null;
+// Load conversation JSON
+const conversationPath = path.join(__dirname, "../data/conversation.json");
+const conversationData = JSON.parse(fs.readFileSync(conversationPath, "utf8"));
 
-try {
-  const filePath = path.join(__dirname, "../data/conversation.json");
-  const content = fs.readFileSync(filePath, "utf8");
-  conversationData = JSON.parse(content);
-  console.log("Conversation JSON loaded.");
-} catch (err) {
-  console.error("Error loading conversation.json:", err);
-}
+export function processConversation(message, currentState) {
+  const states = conversationData.conversationStates;
+  const stateObj = states[currentState] || states["start"];
 
-/**
- * Processes the user message based on the current conversation state.
- */
-export function processConversation(userInput, currentState = "start") {
-  if (!conversationData) {
-    return {
-      botMessage: "Conversation data failed to load.",
-      nextState: currentState,
-      isFallback: true
-    };
+  const userText = message.toLowerCase();
+  let matchedOption = null;
+
+  // Keyword matching
+  for (const option of stateObj.userOptions) {
+    for (const keyword of option.userInput) {
+      if (userText.includes(keyword.toLowerCase())) {
+        matchedOption = option;
+        break;
+      }
+    }
+    if (matchedOption) break;
   }
 
-  const node = conversationData.conversationStates[currentState];
-
-  if (!node) {
-    return {
-      botMessage: "I seem to have lost my place. Let us begin anew.",
-      nextState: "start",
-      isFallback: false
-    };
-  }
-
-  const input = userInput.toLowerCase();
-  const matchedOption = node.userOptions.find(option =>
-    option.userInput.some(keyword => input.includes(keyword.toLowerCase()))
-  );
-
+  // -------------------------
+  // 1. MATCH FOUND
+  // -------------------------
   if (matchedOption) {
+    const next = matchedOption.nextState;
+    const nextObj = states[next];
+
+    let nextBotMessage = "";
+
+    if (typeof nextObj.botMessage === "object" &&
+        nextObj.botMessage.type === "random") 
+    {
+      const arr = nextObj.botMessage.messages;
+      nextBotMessage = arr[Math.floor(Math.random() * arr.length)];
+    } 
+    else {
+      nextBotMessage = nextObj.botMessage;
+    }
+
     return {
-      botMessage: matchedOption.responseText,
-      nextState: matchedOption.nextState,
+      botMessage: matchedOption.responseText + "\n\n" + nextBotMessage,
+      nextState: next,
       isFallback: false
     };
   }
 
-  // No match → fallback to Groq
+  // -------------------------
+  // 2. NO MATCH → FALLBACK
+  // -------------------------
   return {
-    botMessage: node.fallbackMessage,
+    botMessage: stateObj.fallbackMessage || "I do not understand.",
     nextState: currentState,
     isFallback: true
   };
