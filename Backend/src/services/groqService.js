@@ -52,3 +52,4 @@ export async function askGroq(message) {
     return "Even I, Alexander, cannot speak — the oracles fail me.";
   }
 }
+ 

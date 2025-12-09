@@ -6,10 +6,12 @@ import { askGroq } from "../services/groqService.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { message, sessionId } = req.body;
+  let { message, sessionId } = req.body;
 
+  // Auto-generate sessionId if missing
   if (!sessionId) {
-    return res.status(400).json({ botMessage: "Missing sessionId." });
+    sessionId = Math.random().toString(36).substring(2, 15);
+    console.log(`Generated new sessionId: ${sessionId}`);
   }
 
   const session = getSession(sessionId);
@@ -30,9 +32,11 @@ router.post("/", async (req, res) => {
   // 3. Update session state
   updateSession(sessionId, result.nextState);
 
+  // Return bot response and sessionId so frontend can persist it
   res.json({
     botMessage: botReply,
     nextState: result.nextState,
+    sessionId,
   });
 });
 
