@@ -1,63 +1,29 @@
-import conversationData from "../../services/conversationService.js";
-import { askGroq } from "../../services/groqService.js";
-import { getSession } from "../../services/sessionService.js";
+import express from 'express';
+import { processMessage } from '../services/jsonEngine.js';
 
-export async function handleChat(req, res) {
-  const { message, sessionId } = req.body;
+const router = express.Router();
+const userSessions = {};
 
-  const session = getSession(sessionId);
-
-  let state = session.currentState;
-  const states = conversationData.conversationStates;
-
-  // Safety reset
-  if (!states[state]) {
-    state = "start";
-    session.currentState = "start";
+router.post('/chat', (req, res) => {
+  const { message, sessionId = 'default' } = req.body;
+  console.log('✅ JSON ENGINE CALLED - User said:', message);
+  
+  if (!userSessions[sessionId]) {
+    userSessions[sessionId] = { currentState: 'start' };
   }
-
-  const stateObj = states[state];
-  const userText = message.toLowerCase();
-  let match = null;
-
-  // Keyword matching
-  for (const option of stateObj.userOptions) {
-    for (const keyword of option.userInput) {
-      if (userText.includes(keyword.toLowerCase())) {
-        match = option;
-        break;
-      }
-    }
-    if (match) break;
-  }
-
-  if (match) {
-    const next = match.nextState;
-    session.currentState = next;
-
-    const nextObj = states[next];
-
-    let botReply =
-      nextObj.botMessage.type === "random"
-        ? nextObj.botMessage.messages[
-            Math.floor(Math.random() * nextObj.botMessage.messages.length)
-          ]
-        : nextObj.botMessage;
-
-    return res.json({
-      botMessage: match.responseText + "\n\n" + botReply,
-      nextState: next,
-    });
-  }
-
-  // Fallback
-  const aiReply = await askGroq(message);
-
+  
+  const userSession = userSessions[sessionId];
+  const result = processMessage(message, userSession.currentState);
+  userSession.currentState = result.nextState;
+  
+  console.log('✅ JSON ENGINE RESPONSE:', result.botMessage);
+  
   res.json({
-    botMessage:
-      (stateObj.fallbackMessage || "I do not understand your words.") +
-      "\n\n" +
-      aiReply,
-    nextState: state,
+    botMessage: result.botMessage,
+    nextState: result.nextState
   });
-}
+});
+
+export default router;
+  
+ 
