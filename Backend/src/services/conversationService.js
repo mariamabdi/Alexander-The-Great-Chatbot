@@ -16,4 +16,45 @@ try {
   console.error("Error loading conversation.json:", err);
 }
 
-export default conversationData;
+/**
+ * Processes the user message based on the current conversation state.
+ */
+export function processConversation(userInput, currentState = "start") {
+  if (!conversationData) {
+    return {
+      botMessage: "Conversation data failed to load.",
+      nextState: currentState,
+      isFallback: true
+    };
+  }
+
+  const node = conversationData.conversationStates[currentState];
+
+  if (!node) {
+    return {
+      botMessage: "I seem to have lost my place. Let us begin anew.",
+      nextState: "start",
+      isFallback: false
+    };
+  }
+
+  const input = userInput.toLowerCase();
+  const matchedOption = node.userOptions.find(option =>
+    option.userInput.some(keyword => input.includes(keyword.toLowerCase()))
+  );
+
+  if (matchedOption) {
+    return {
+      botMessage: matchedOption.responseText,
+      nextState: matchedOption.nextState,
+      isFallback: false
+    };
+  }
+
+  // No match → fallback to Groq
+  return {
+    botMessage: node.fallbackMessage,
+    nextState: currentState,
+    isFallback: true
+  };
+}

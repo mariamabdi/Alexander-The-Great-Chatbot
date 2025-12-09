@@ -1,29 +1,39 @@
-import express from 'express';
-import { processMessage } from '../services/jsonEngine.js';
+import express from "express";
+import { getSession, updateSession } from "../services/sessionService.js";
+import { processConversation } from "../services/conversationService.js";
+import { askGroq } from "../services/groqService.js";
 
 const router = express.Router();
-const userSessions = {};
 
-router.post('/chat', (req, res) => {
-  const { message, sessionId = 'default' } = req.body;
-  console.log('✅ JSON ENGINE CALLED - User said:', message);
-  
-  if (!userSessions[sessionId]) {
-    userSessions[sessionId] = { currentState: 'start' };
+router.post("/", async (req, res) => {
+  const { message, sessionId } = req.body;
+
+  if (!sessionId) {
+    return res.status(400).json({ botMessage: "Missing sessionId." });
   }
-  
-  const userSession = userSessions[sessionId];
-  const result = processMessage(message, userSession.currentState);
-  userSession.currentState = result.nextState;
-  
-  console.log('✅ JSON ENGINE RESPONSE:', result.botMessage);
-  
+
+  const session = getSession(sessionId);
+  const currentState = session.currentState;
+
+  // 1. Process via JSON conversation logic
+  const result = processConversation(message, currentState);
+
+  // 2. If no keyword match → fallback to Groq
+  let botReply = "";
+  if (result.isFallback) {
+    const aiReply = await askGroq(message);
+    botReply = result.botMessage + "\n\n" + aiReply;
+  } else {
+    botReply = result.botMessage;
+  }
+
+  // 3. Update session state
+  updateSession(sessionId, result.nextState);
+
   res.json({
-    botMessage: result.botMessage,
-    nextState: result.nextState
+    botMessage: botReply,
+    nextState: result.nextState,
   });
 });
 
 export default router;
-  
- 
