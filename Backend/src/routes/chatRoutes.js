@@ -1,10 +1,3 @@
-import express from "express";
-import { getSession, updateSession } from "../services/sessionService.js";
-import { processConversation } from "../services/conversationService.js";
-import { askGroq } from "../services/groqService.js";
-
-const router = express.Router();
-
 router.post("/", async (req, res) => {
   let { message, sessionId } = req.body;
 
@@ -32,12 +25,10 @@ router.post("/", async (req, res) => {
   // 3. Update session state
   updateSession(sessionId, result.nextState);
 
-  // Return bot response and sessionId so frontend can persist it
+  // Return sessionId in response so frontend can store it
   res.json({
     botMessage: botReply,
     nextState: result.nextState,
     sessionId,
   });
 });
-
-export default router;
