@@ -86,8 +86,8 @@ body::before {
 
 /* RESTART BUTTON STYLING (Uses Poppins, inherited from reset) */
 .restart-btn {
-    background: #872323;
-    border: none;
+    background: #014f09;
+    border:#2d0f0f;
     padding: 12px 20px; 
     color: white;
     cursor: pointer;
@@ -100,6 +100,13 @@ body::before {
     top: 50%; 
     transform: translateY(-50%); 
 }
+.restart-btn:hover {
+    background: #18aa0e;  /* lighter red */
+    border: #147640;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
 
 
 /* --- SUB NAVIGATION (ROW 2: LINKS) --- */
@@ -211,7 +218,7 @@ body::before {
 /* Option bubbles stacked vertically */
 .options {
     display: flex;
-    flex-direction: column; /* STACKS THEM DOWNWARD */
+    flex-direction: column;
     gap: 10px; /* space between each option */
     margin-top: 15px;
     max-width: 70%;
