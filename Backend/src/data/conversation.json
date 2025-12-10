@@ -18,7 +18,7 @@
   },
   {
     "userInput": ["wassup", "wys", "what you saying", "how you doing", "how are you"],
-    "responseText": "As someone who has lived the great story that is my life, I feel excellent! I doubt you feel the same...",
+    "responseText": "As someone who has lived the great story that is my life, I feel excellent! Alas, I doubt you could ever feel the same...",
     "nextState": "start"
   },
   {
