@@ -86,7 +86,7 @@ function App() {
   return (
     <>
       <header className="top-bar">
-        <h1>Alexander the Great</h1>
+        <h1>Alexander The Great Chatbot</h1>
         <button
           className="restart-btn"
           onClick={() => {
@@ -97,6 +97,15 @@ function App() {
           RESTART
         </button>
       </header>
+      {/* Secondary Header (NOT fixed) */}
+<div className="profile-header">
+  <img src={alexanderImg} alt="Alexander" className="profile-large" />
+  <div className="profile-info">
+    <h2>Alexander of Macedon</h2>
+    <p>The Conqueror of Worlds</p>
+  </div>
+</div>
+
 
       <main className="chat-container">
         {messages.map((msg, i) => (
