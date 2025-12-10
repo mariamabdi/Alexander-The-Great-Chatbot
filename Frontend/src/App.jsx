@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
+import alexanderImg from "./assets/alexander.png";
 
 function App() {
   const [messages, setMessages] = useState([]);
+  const [options, setOptions] = useState([]);
   const [inputText, setInputText] = useState("");
   const [sessionId, setSessionId] = useState(null);
   const messagesEndRef = useRef(null);
 
-  // Initialize sessionId
+  // Load or create sessionId
   useEffect(() => {
     let storedId = localStorage.getItem("sessionId");
     if (!storedId) {
@@ -19,51 +21,57 @@ function App() {
 
   // Auto-scroll
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Load start message
+  // Load START message + options
   useEffect(() => {
     if (!sessionId) return;
+
     async function loadStart() {
       try {
-        const res = await fetch("http://localhost:9990/api/start", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId }),
-        });
+        const res = await fetch("http://localhost:9990/api/start");
         const data = await res.json();
+
         setMessages([{ text: data.botMessage, isUser: false }]);
+        setOptions(data.options || []);
       } catch (err) {
-        console.error("Start message error:", err);
+        console.error("Start error:", err);
       }
     }
+
     loadStart();
   }, [sessionId]);
 
-  // Send message
-  const sendMessage = async () => {
-    if (!inputText.trim() || !sessionId) return;
+  // Send message (user or option)
+  const sendMessage = async (textOverride) => {
+    const messageToSend = textOverride || inputText;
+    if (!messageToSend.trim() || !sessionId) return;
 
-    const userMsg = { text: inputText, isUser: true };
-    setMessages((m) => [...m, userMsg]);
+    setOptions([]);
+
+    setMessages((prev) => [...prev, { text: messageToSend, isUser: true }]);
 
     try {
       const res = await fetch("http://localhost:9990/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: inputText, sessionId }),
+        body: JSON.stringify({
+          message: messageToSend,
+          sessionId,
+        }),
       });
 
       const data = await res.json();
-      const botMsg = { text: data.botMessage, isUser: false };
-      setMessages((m) => [...m, botMsg]);
+
+      setMessages((prev) => [
+        ...prev,
+        { text: data.botMessage, isUser: false },
+      ]);
     } catch (err) {
       console.error("Chat error:", err);
-      setMessages((m) => [
-        ...m,
+      setMessages((prev) => [
+        ...prev,
         { text: "Backend error — cannot connect.", isUser: false },
       ]);
     }
@@ -71,50 +79,58 @@ function App() {
     setInputText("");
   };
 
+  const handleOptionClick = (optionText) => {
+    sendMessage(optionText);
+  };
+
   return (
     <>
-      {/* Google Fonts */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet"
-      />
-
-      {/* Header */}
       <header className="top-bar">
         <h1>Alexander the Great</h1>
         <button
           className="restart-btn"
           onClick={() => {
-            setMessages([]);
             localStorage.removeItem("sessionId");
-            setSessionId(null);
+            window.location.reload();
           }}
         >
           RESTART
         </button>
       </header>
 
-      {/* Navigation */}
-      <nav className="sub-nav">
-        <a href="#" className="nav-link">Menu</a>
-        <a href="#" className="nav-link">About Us</a>
-        <a href="#" className="nav-link">Contact</a>
-      </nav>
-
-      {/* Main Chat Area */}
       <main className="chat-container">
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`message-box ${msg.isUser ? "user" : "alexander"}`}
+            className={`message-row ${msg.isUser ? "user-row" : "alexander-row"}`}
           >
-            <p>{msg.text}</p>
+            {!msg.isUser && (
+              <img src={alexanderImg} alt="Alexander" className="alexander-pfp" />
+            )}
+
+            <div className={`message-box ${msg.isUser ? "user" : "alexander"}`}>
+              <p>{msg.text}</p>
+            </div>
           </div>
         ))}
+
+        {options.length > 0 && (
+          <div className="options">
+            {options.map((opt, i) => (
+              <button
+                key={i}
+                className="option-bubble"
+                onClick={() => handleOptionClick(opt)}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div ref={messagesEndRef} />
       </main>
 
-      {/* Input Footer */}
       <footer className="input-bar">
         <input
           type="text"
@@ -123,7 +139,9 @@ function App() {
           onChange={(e) => setInputText(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
-        <button className="send-btn" onClick={sendMessage}>➤</button>
+        <button className="send-btn" onClick={() => sendMessage()}>
+          ➤
+        </button>
       </footer>
     </>
   );

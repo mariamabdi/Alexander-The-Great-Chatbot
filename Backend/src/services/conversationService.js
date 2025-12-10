@@ -1,65 +1,79 @@
+// src/services/conversationService.js
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// Resolve file location
+// Resolve directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load conversation JSON
-const conversationPath = path.join(__dirname, "../data/conversation.json");
-const conversationData = JSON.parse(fs.readFileSync(conversationPath, "utf8"));
+// Load JSON conversation file
+let conversationData = null;
+try {
+  const filePath = path.join(__dirname, "../data/conversation.json");
+  const raw = fs.readFileSync(filePath, "utf8");
+  conversationData = JSON.parse(raw);
+  console.log("Conversation JSON loaded.");
+} catch (err) {
+  console.error("Error loading conversation JSON:", err);
+}
 
-export function processConversation(message, currentState) {
+// ------------------------
+// Get random start message
+// ------------------------
+export function getStartMessage() {
+  const start = conversationData.conversationStates.start;
+
+  if (start.botMessage.type === "random") {
+    const choices = start.botMessage.messages;
+    return choices[Math.floor(Math.random() * choices.length)];
+  }
+
+  return start.botMessage;
+}
+
+// ------------------------
+// Main conversation engine
+// ------------------------
+export function processConversation(userMessage, currentState) {
   const states = conversationData.conversationStates;
-  const stateObj = states[currentState] || states["start"];
+  const stateObj = states[currentState];
 
-  const userText = message.toLowerCase();
-  let matchedOption = null;
+  const text = userMessage.toLowerCase();
+  let match = null;
 
   // Keyword matching
   for (const option of stateObj.userOptions) {
-    for (const keyword of option.userInput) {
-      if (userText.includes(keyword.toLowerCase())) {
-        matchedOption = option;
+    for (const word of option.userInput) {
+      if (text.includes(word.toLowerCase())) {
+        match = option;
         break;
       }
     }
-    if (matchedOption) break;
+    if (match) break;
   }
 
-  // -------------------------
-  // 1. MATCH FOUND
-  // -------------------------
-  if (matchedOption) {
-    const next = matchedOption.nextState;
-    const nextObj = states[next];
+  // → MATCH FOUND (NOT FALLBACK)
+  if (match) {
+    const nextState = match.nextState;
+    const nextObj = states[nextState];
 
-    let nextBotMessage = "";
-
-    if (typeof nextObj.botMessage === "object" &&
-        nextObj.botMessage.type === "random") 
-    {
-      const arr = nextObj.botMessage.messages;
-      nextBotMessage = arr[Math.floor(Math.random() * arr.length)];
-    } 
-    else {
-      nextBotMessage = nextObj.botMessage;
+    let botMsg = nextObj.botMessage;
+    if (typeof botMsg === "object" && botMsg.type === "random") {
+      botMsg = botMsg.messages[Math.floor(Math.random() * botMsg.messages.length)];
     }
 
     return {
-      botMessage: matchedOption.responseText + "\n\n" + nextBotMessage,
-      nextState: next,
-      isFallback: false
+      isFallback: false,
+      botMessage: match.responseText + "\n\n" + botMsg,
+      nextState,
     };
   }
 
-  // -------------------------
-  // 2. NO MATCH → FALLBACK
-  // -------------------------
+  // → NO MATCH (FALLBACK)
   return {
+    isFallback: true,
     botMessage: stateObj.fallbackMessage || "I do not understand.",
     nextState: currentState,
-    isFallback: true
   };
 }

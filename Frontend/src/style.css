@@ -1,4 +1,21 @@
-/* --- GENERAL RESET --- */
+.top-bar {
+    background: #5a2121;
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;   /* <— PIN TO TOP */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); /* visual separation */
+}
+
+  
 * {
     margin: 0;
     padding: 0;
@@ -35,17 +52,6 @@ body::before {
     background-color: rgba(232, 227, 210, 0.7); 
     
     z-index: -1; 
-}
-
-/* --- TOP BAR (ROW 1: TITLE & RESTART BUTTON) --- */
-.top-bar {
-    background: #5a2121; 
-    color: white;
-    padding: 15px 25px;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    position: relative; 
 }
 
 /* Title Styling (Overrides Poppins to use Georgia) */
@@ -102,7 +108,8 @@ body::before {
     padding: 20px;
     max-width: 900px;
     margin: auto;
-    margin-top: 15px; 
+    margin-top: 100px; 
+    padding-bottom: 120px;
 }
 
 /* Message Box Base (Uses Poppins, inherited from reset) */
@@ -116,7 +123,7 @@ body::before {
 
 /* Alexander message: Semi-transparent light tan */
 .alexander {
-    background: rgba(240, 233, 210, 0.8); 
+    background: rgba(190, 168, 96, 0.8); 
     color: #2e2d2c; 
 }
 
@@ -180,3 +187,50 @@ body::before {
 .send-btn:hover {
     background: #872323; 
 }
+/* Option bubbles stacked vertically */
+.options {
+    display: flex;
+    flex-direction: column; /* STACKS THEM DOWNWARD */
+    gap: 10px; /* space between each option */
+    margin-top: 15px;
+    max-width: 70%;
+  }
+  
+  /* Make the option buttons look like  bubbles */
+  .option-bubble {
+    background: rgba(240, 233, 210, 0.8);
+    color: #2e2d2c;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .option-bubble:hover {
+    background: rgba(240, 233, 210, 1);
+  }
+  /* Alex image + message layout */
+.message-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .alexander-row {
+    flex-direction: row;
+  }
+  
+  .user-row {
+    flex-direction: row-reverse;
+  }
+  
+  .alexander-pfp {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+  }
+  

@@ -13,17 +13,12 @@
    "userOptions": [
   {
     "userInput": ["hello", "hi there", "hey", "greetings", "hail"],
-    "responseText": "A warm greeting to you, traveler!",
+    "responseText": "Greetings! or as I say χαῖρε! Enough of the pleasantries and ask questions to get invaluable insight from a great figure such as I!",
     "nextState": "start"
   },
   {
-    "userInput": ["wys", "what you saying", "how you doing", "how are you"],
+    "userInput": ["wassup", "wys", "what you saying", "how you doing", "how are you"],
     "responseText": "As someone who has lived the great story that is my life, I feel excellent! I doubt you feel the same...",
-    "nextState": "start"
-  },
-  {
-    "userInput": ["colour"],
-    "responseText": "Red! the burning passion of war...",
     "nextState": "start"
   },
   {
@@ -71,7 +66,7 @@
           "nextState": "bucephalus_story"
         },
         {
-          "userInput": ["lead", "command", "leadership"],
+          "userInput": ["lead", "command", "leadership,", "macedonia"],
           "responseText": "The essence of command!",
           "nextState": "leadership_lessons"
         },
