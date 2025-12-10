@@ -3,17 +3,38 @@
     color: white;
     padding: 15px 25px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* prevents mush-together */
     align-items: center;
 
-    position: fixed;   /* <— PIN TO TOP */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
 
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); /* visual separation */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
+
+/* Ensure the title never shrinks too small */
+.top-bar h1 {
+    font-family: "Georgia", serif;
+    font-weight: bold;
+    font-size: clamp(18px, 4vw, 28px); /* responsive font */
+    white-space: nowrap; /* prevents breaking */
+}
+
+/* Restart button stays readable and aligned */
+.restart-btn {
+    background: #872323;
+    border: none;
+    padding: 10px 16px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: clamp(12px, 2vw, 16px);
+}
+
 
   
 * {
@@ -233,4 +254,17 @@ body::before {
     margin-right: 12px;
     object-fit: cover;
   }
-  
+  @media (max-width: 420px) {
+    .top-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .restart-btn {
+        position: static; /* remove absolute positioning */
+        transform: none;
+        width: 100%;
+        max-width: 200px;
+    }
+}
