@@ -52,10 +52,13 @@ export function processMessage(userInput, currentState = "start") {
   }
 
   // No match → fallback
-  console.log("NO MATCH - Fallback");
+// No match → fallback
+console.log("NO MATCH - Fallback");
 
-  return {
-    botMessage: node.fallbackMessage,
-    nextState: currentState
-  };
+return {
+  botMessage: node.fallbackMessage,
+  nextState: currentState,
+  isFallback: true
+};
+
 }
