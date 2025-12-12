@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
   // 2. Fallback to Groq ONLY if JSON fails
   if (result.isFallback) {
-    let aiReply = await askGroq(messag, session.history);
+    let aiReply = await askGroq(message, session.history);
     aiReply = stripOuterQuotes(aiReply);
     botReply = aiReply;
   } else {

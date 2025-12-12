@@ -35,11 +35,6 @@
     "userInput": ["personal","life", "family", "friend", "life", "childhood", "love", "relationships", "private"],
     "responseText": "You speak of matters close to my heart.",
     "nextState": "personal_overview"
-  },
-  {
-    "userInput": ["legacy", "death", "impact", "history", "remember", "future", "influence", "after", "historical impact"],
-    "responseText": "You ask how history will remember me...",
-    "nextState": "legacy_overview"
   }
 ]
 ,
@@ -48,7 +43,7 @@
 
     "military_overview": {
       "id": "military_overview",
-      "botMessage": "My campaigns stretched 22,000 miles - from Greece to India. I never lost a battle! Shall I tell you of my greatest battles, my strategic genius, my loyal companions like Bucephalus, or the Macedonian army's secrets?",
+      "botMessage": "My campaigns stretched 22,000 miles - from Greece to India. I never lost a battle! Shall I tell you of my greatest battles, my strategic genius, or my loyal companions like Bucephalus.",
       "userOptions": [
         {
           "userInput": ["battle", "victory", "gaugamela", "hydaspes", "issus", "conflict"],
@@ -56,7 +51,7 @@
           "nextState": "battles_overview"
         },
         {
-          "userInput": ["strategy", "strategic", "tactic", "formation", "plan", "genius"],
+          "userInput": ["strategy", "strategic", "tactic", "formation", "plan", "genius", "secrets"],
           "responseText": "The art of war demands cunning!",
           "nextState": "military_strategy"
         },
@@ -66,7 +61,7 @@
           "nextState": "bucephalus_story"
         },
         {
-          "userInput": ["lead", "command", "leadership,", "macedonia"],
+          "userInput": ["lead", "command", "leadership,"],
           "responseText": "The essence of command!",
           "nextState": "leadership_lessons"
         },
@@ -372,7 +367,7 @@
 
     "family_dynamics": {
       "id": "family_dynamics",
-      "botMessage": "My father Philip made Macedonia powerful but was murdered when I was 20. My mother Olympias was fierce and ambitious, claiming Zeus was my true father. I loved Philip but had to surpass him. A complicated inheritance!",
+      "botMessage": "My father Philip made Macedonia powerful but was murdered when I was 20. My mother Olympias was fierce and ambitious, claiming Zeus was my true father. I loved Philip but had to surpass him. A complicated inheritance! Which would you like to hear more of?",
       "userOptions": [
         {
           "userInput": ["philip", "father", "murder", "death", "family"],
@@ -395,7 +390,7 @@
 
     "childhood_lessons": {
       "id": "childhood_lessons",
-      "botMessage": "At age 12, I tamed Bucephalus when grown men failed. At 16, I governed Macedonia while Philip was away. Aristotle came when I was 13. I learned early: trust instincts, lead boldly, seek wisdom. What childhood moment shaped me most?",
+      "botMessage": "At age 12, I tamed Bucephalus when grown men failed. At 16, I governed Macedonia while Philip was away. Aristotle came when I was 13. I learned early: trust instincts, lead boldly, seek wisdom. Would you like to hear of my beloved horse or how I ruled from a young age?",
       "userOptions": [
         {
           "userInput": ["bucephalus", "horse", "tame", "first"],
@@ -418,7 +413,7 @@
 
     "relationships_love": {
       "id": "relationships_love",
-      "botMessage": "I married three times for politics, but Roxane, the Bactrian princess, I married for love. She was said to be the most beautiful woman in Asia. After my death, she bore my son Alexander IV, whom Cassander would murder.",
+      "botMessage": "I married three times for politics, but Roxane, the Bactrian princess, I married for love. She was said to be the most beautiful woman in Asia. After my death, she bore my son Alexander IV. Who would you like to hear more of?",
       "userOptions": [
         {
           "userInput": ["roxane", "wife", "love", "beautiful"],
@@ -615,7 +610,7 @@
           "nextState": "enduring_influence"
         },
         {
-          "userInput": ["early", "young", "32", "die", "waste"],
+          "userInput": ["early", "young", "32", "die", "waste", "death"],
           "responseText": "So much left undone...",
           "nextState": "succession_issues"
         },
