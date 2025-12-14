@@ -9,7 +9,10 @@ const sessions = {};
  */
 export function getSession(sessionId) {
   if (!sessions[sessionId]) {
-    sessions[sessionId] = { currentState: "start" };
+    sessions[sessionId] = {
+      currentState: "start",
+      history: []   
+    };
   }
   return sessions[sessionId];
 }

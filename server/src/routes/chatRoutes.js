@@ -5,16 +5,24 @@ import { askGroq } from "../services/groqService.js";
 
 const router = express.Router();
 
+const MAX_HISTORY = 8;
+
 // Helper: remove wrapping quotation marks from LLM replies
 function stripOuterQuotes(str) {
   if (typeof str !== "string") return str;
   return str.replace(/^"(.*)"$/, "$1");
 }
 
+// Helper: keep memory bounded
+function trimHistory(history) {
+  if (history.length > MAX_HISTORY) {
+    history.splice(0, history.length - MAX_HISTORY);
+  }
+}
+
 router.post("/", async (req, res) => {
   let { message, sessionId } = req.body;
 
-  // Ensure sessionId exists
   if (!sessionId) {
     sessionId = Math.random().toString(36).substring(2, 15);
   }
@@ -22,12 +30,18 @@ router.post("/", async (req, res) => {
   const session = getSession(sessionId);
   const currentState = session.currentState;
 
-  // 1. JSON conversation engine
+  // Store user message in memory
+  session.history.push({
+    role: "user",
+    content: message
+  });
+
+  // JSON conversation engine
   const result = processConversation(message, currentState);
 
   let botReply;
 
-  // 2. Fallback to Groq ONLY if JSON fails
+  // Fallback to Groq ONLY if JSON fails
   if (result.isFallback) {
     let aiReply = await askGroq(message, session.history);
     aiReply = stripOuterQuotes(aiReply);
@@ -36,7 +50,16 @@ router.post("/", async (req, res) => {
     botReply = result.botMessage;
   }
 
-  // 3. Update session state
+  // Store bot reply in memory
+  session.history.push({
+    role: "assistant",
+    content: botReply
+  });
+
+  // Trim memory
+  trimHistory(session.history);
+
+  // Update state
   updateSession(sessionId, result.nextState);
 
   res.json({

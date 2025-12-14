@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
         ]
       : start.botMessage;
 
-  // Only show these four options — exactly as you requested
+  // Only show these four options 
   const options = [
     "military campaigns",
     "philosophical teachings",
