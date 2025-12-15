@@ -149,7 +149,20 @@ function App() {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
         <button className="send-btn" onClick={() => sendMessage()}>
-          ➤
+        <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="25"
+    height="22"
+    viewBox="0 0 29 20"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M22 2L11 13" />
+    <path d="M22 2L15 22L11 13L2 9L22 2Z" />
+  </svg>
         </button>
       </footer>
     </>

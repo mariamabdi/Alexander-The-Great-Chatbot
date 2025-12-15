@@ -35,6 +35,11 @@
     "userInput": ["personal","life", "family", "friend", "life", "childhood", "love", "relationships", "private"],
     "responseText": "You speak of matters close to my heart.",
     "nextState": "personal_overview"
+  },
+  {
+    "userInput": ["historical impact", "legacy", "history", "remembered"],
+    "responseText": "You ask of how I shall be remembered...",
+    "nextState": "legacy_overview"
   }
 ]
 ,
@@ -242,7 +247,7 @@
 
     "philosophy_overview": {
       "id": "philosophy_overview",
-      "botMessage": "For three years, Aristotle was my tutor. 'The roots of education are bitter, but the fruit is sweet,' he said. He taught me medicine, ethics, politics, and gave me an Iliad I carried everywhere. Would you hear of his teachings or political philosophy?",
+      "botMessage": "For three years, Aristotle was my tutor. 'The roots of education are bitter, but the fruit is sweet,' he said. Would you hear of his teachings or political philosophy?",
       "userOptions": [
         {
           "userInput": ["aristotle", "teach", "tutor", "lesson"],
@@ -485,7 +490,7 @@
       "botMessage": "I died at 32, my empire torn apart by my generals. Yet my legacy endured: the Hellenistic world, cities that became centers of learning. How should I be remembered: empire-builder, cultural unifier, or tragic figure?",
       "userOptions": [
         {
-          "userInput": ["empire", "build", "conquer", "great"],
+          "userInput": ["empire", "build", "conquer", "great", "hellenistic world", "impact"],
           "responseText": "The empire that changed history!",
           "nextState": "hellenistic_impact"
         },

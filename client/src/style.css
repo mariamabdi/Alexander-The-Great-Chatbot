@@ -23,19 +23,6 @@
     white-space: nowrap; /* prevents breaking */
 }
 
-/* Restart button stays readable and aligned */
-.restart-btn {
-    background: #872323;
-    border: none;
-    padding: 10px 16px;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: clamp(12px, 2vw, 16px);
-}
-
-
   
 * {
     margin: 0;
@@ -86,26 +73,37 @@ body::before {
 
 /* RESTART BUTTON STYLING (Uses Poppins, inherited from reset) */
 .restart-btn {
-    background: #014f09;
-    border:#2d0f0f;
-    padding: 12px 20px; 
+    background: linear-gradient(to bottom, #0d4c18, #1aa328);
     color: white;
+    border: 1px solid #013d07;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    /* Uses Poppins, inherited from reset */
-    font-weight: bold; 
-    
+  
     position: absolute;
-    right: 20px; 
-    top: 50%; 
-    transform: translateY(-50%); 
-}
-.restart-btn:hover {
-    background: #18aa0e;  /* lighter red */
-    border: #147640;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  
+    box-shadow:
+      0 4px 0 #013d07,      /* bottom “ledge” */
+      0 6px 10px rgba(0,0,0,0.35); /* depth */
+  
+    transition: all 0.15s ease;
+  }
+  
+  .restart-btn:hover {
+    background: linear-gradient(to bottom, #2bc94b, #2bb945);
+  }
+  
+  .restart-btn:active {
+    transform: translateY(calc(-50% + 3px));
+    box-shadow:
+      0 2px 0 #013d07,
+      0 3px 6px rgba(0,0,0,0.25);
+  }
+  
 
 
 
@@ -131,119 +129,132 @@ body::before {
 }
 
 
-/* --- CHAT AREA --- */
 .chat-container {
     padding: 20px;
-    max-width: 900px;
+    max-width: 1200px;
     margin: auto;
     margin-top: 100px; 
     padding-bottom: 120px;
 }
 
-/* Message Box Base (Uses Poppins, inherited from reset) */
-.message-box {
-    padding: 15px 20px;
-    max-width: 70%;
-    margin-bottom: 25px;
-    border-radius: 12px; 
-    font-weight: 400; 
-}
 
-/* Alexander message: Semi-transparent light tan */
+
 .alexander {
     background: rgba(190, 168, 96, 0.8); 
     color: #2e2d2c; 
+    padding: 15px 20px;
+    max-width: 70%;
+    margin-bottom: 25px;
+    border-radius: 17px; 
+    font-weight: 400; 
 }
 
-/* User message: Muted Terracotta Color */
+
 .user {
     background: #894c40; 
     color: white; 
     margin-left: auto;
-    
+    padding: 15px 20px;
+    max-width: 70%;
+    margin-bottom: 25px;
+    border-radius: 17px; 
+    font-weight: 400; 
     border-right: none; 
     border-radius: 12px; 
 }
 
-/* Option buttons (Uses Poppins, inherited from reset) */
-.options {
-    margin-top: 10px;
-}
 
 .options button {
-    background: #ded3b5;
-    border: none;
-    padding: 8px 15px;
-    margin-right: 8px;
+    background: linear-gradient(to bottom, #fffdf6, #d4be90);
+    border: 1px solid #bfa76a;
+    padding: 12px 16px;
+    text-align: left;
+    border-radius: 14px;
+    font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
-    color: #2e2d2c; 
-}
-
-/* --- INPUT BAR --- */
-.input-bar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(244, 239, 230, 0.9); 
-    padding: 10px 20px;
-    display: flex;
-}
-
-/* Input text (Uses Poppins, inherited from reset) */
-.input-bar input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #bdae9b;
-    border-radius: 5px;
-    outline: none;
-}
-
-/* Send button: DEEP MAROON (Uses Poppins, inherited from reset) */
-.send-btn {
-    background: #5a2121; 
-    color: white;
-    border: none;
-    padding: 0 20px;
-    margin-left: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 22px;
-    transition: background-color 0.2s;
-}
-
-.send-btn:hover {
-    background: #872323; 
-}
-/* Option bubbles stacked vertically */
-.options {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* space between each option */
     margin-top: 15px;
-    max-width: 70%;
+  
+    box-shadow:
+      0 3px 0 #91793e,
+      0 6px 10px rgba(0,0,0,0.35); /* depth */
+
+  transition: all 0.15s ease;
+  
+    
   }
   
-  /* Make the option buttons look like  bubbles */
-  .option-bubble {
-    background: rgba(240, 233, 210, 0.8);
-    color: #2e2d2c;
-    padding: 12px 18px;
-    border-radius: 12px;
-    border: none;
-    text-align: left;
-    cursor: pointer;
+  .options button:hover {
+    background: linear-gradient(to bottom, #f4e6c4, #a9771b);
+  }
+  
+  
+  
+
+
+  
+  
+
+
+
+/* --- INPUT BAR --- */ 
+.input-bar { 
+    position: fixed; 
+    bottom: 0; width: 100%; 
+    background: rgba(255, 250, 235, 0.95); 
+    border-top: 2px solid #bfa76a; 
+    padding: 12px 20px; 
+    display: flex; gap: 10px; 
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15); }
+  
+  /* Input text */
+  .input-bar input {
+    flex: 1;
+    padding: 20px;
+    border: 2px solid #891d1d;
+    border-radius: 30px;
+    outline: none;
     font-size: 16px;
+    background: rgba(255, 255, 255, 0.95);
   }
   
-  .option-bubble:hover {
-    background: rgba(240, 233, 210, 1);
+  
+
+
+.send-btn {
+    background: linear-gradient(to bottom, #a13b3b, #5a2121);
+    color: white;
+    border: 1px solid #3b0f0f;
+    padding: 0 22px;
+    border-radius: 30px;
+    font-size: 22px;
+    cursor: pointer;
+  
+    box-shadow:
+      0 4px 0 #310e0e,
+      0 6px 12px rgba(0,0,0,0.3);
+  
+    transition: all 0.15s ease;
   }
+  
+  .send-btn:hover {
+    background: linear-gradient(to bottom, #d73f3f, #952a2a);
+  }
+  
+  .send-btn:active {
+    transform: translateY(3px);
+    box-shadow:
+      0 2px 0 #3b0f0f,
+      0 3px 6px rgba(0,0,0,0.25);
+  }
+  
+
   /* Alex image + message layout */
 .message-row {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin-bottom:30px;
   }
   
   .alexander-row {
@@ -261,20 +272,9 @@ body::before {
     margin-right: 12px;
     object-fit: cover;
   }
-  @media (max-width: 420px) {
-    .top-bar {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
 
-    .restart-btn {
-        position: static; /* remove absolute positioning */
-        transform: none;
-        width: 100%;
-        max-width: 200px;
-    }
-}
+
+
 /* --- SECOND HEADER WITH LARGE PROFILE PIC --- */
 .profile-header {
     margin-top: 80px; /* gives space so it sits UNDER the fixed header */
