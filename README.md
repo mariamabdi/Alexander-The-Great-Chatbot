@@ -46,7 +46,8 @@ KEY DESIGN PRINCIPLES
 ------------------------------------------------------------
 RUNNING THE PROJECT
 ------------------------------------------------------------
-1. From the /client directory:
+1. Clone Repo and open in VScode
+2. From the /client directory:
    npm install
    npm run dev
 3. From the /server directory:
