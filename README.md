@@ -46,10 +46,16 @@ KEY DESIGN PRINCIPLES
 ------------------------------------------------------------
 RUNNING THE PROJECT
 ------------------------------------------------------------
-1. Start the backend server (see /server/README.md)
-2. Start the frontend client (see /client/README.md)
-3. Open the client in a web browser
-4. Interact with the chatbot as Alexander the Great
+1. From the /client directory:
+   npm install
+   npm run dev
+3. From the /server directory:
+   npm install
+   npm start
+The server runs on:
+http://localhost:9990
+5. Open the client in a web browser
+6. Interact with the chatbot as Alexander the Great
 
 ------------------------------------------------------------
 SUBMISSION NOTES
