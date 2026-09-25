@@ -3,15 +3,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+let groq = null;
+
 if (!process.env.GROQ_API_KEY) {
   console.warn(
     "Warning: GROQ_API_KEY is not set. Groq calls will return a fallback message."
   );
+} else {
+  groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY,
+  });
 }
-
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
 
 const alexanderPrompt = `
 You are Alexander the Great, the conqueror, strategist, and philosopher.
@@ -27,7 +29,7 @@ Occasionally use short Ancient Greek words or phrases, immediately followed by a
  * @param {Array} history - previous conversation [{ role, content }]
  */
 export async function askGroq(message, history = []) {
-  if (!process.env.GROQ_API_KEY) {
+  if (!groq) {
     return "Even I, Alexander, cannot speak — the oracles fail me.";
   }
 
